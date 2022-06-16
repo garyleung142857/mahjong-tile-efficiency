@@ -1,0 +1,11 @@
+{
+  "name": "tile-efficiency",
+  "version": "1.0.0",
+  "description": "Tile efficiency calculation for several Mahjong variants",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
