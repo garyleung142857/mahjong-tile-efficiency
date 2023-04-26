@@ -141,7 +141,7 @@ const calShantenHonourAndKnittedTiles = (hand) => {
   uniqueTiles = Math.max(
     s[0][0] + Math.max(s[1][1] + s[2][2], s[1][2] + s[2][1]),
     s[0][1] + Math.max(s[1][0] + s[2][2], s[1][2] + s[2][0]),
-    s[0][2] + Math.max(s[1][1] + s[2][0], s[1][0] + s[2][1]),
+    s[0][2] + Math.max(s[1][1] + s[2][0], s[1][0] + s[2][1])
   ) + applyMaskSuitResidual(hand[3], masks.kokushiHonour)[0]
 
   return 13 - uniqueTiles
