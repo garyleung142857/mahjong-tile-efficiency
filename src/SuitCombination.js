@@ -31,11 +31,13 @@ export const suitToStr = (suit, isHonour) => {
       s += c.toString()
     })
   } else {
-    suit.forEach((tileCount, idx) => {
-      const t = idx + 1
-      const tileStr = t.toString()
-      s += tileStr.repeat(tileCount)
-    })
+    // hash represent counts of tiles
+    // start from the lowest existing tiles
+    // ends with highest existing tiles
+    // eg. 245667 will map to 101121
+    while(suit[0] === 0) suit.shift()
+    while(suit[suit.length - 1] === 0) suit.pop()
+    s = suit.join('')
   }
   return s
 }
