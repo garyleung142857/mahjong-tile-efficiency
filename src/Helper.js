@@ -22,22 +22,6 @@ export const reduceHand = (hand) => {
 }
 
 
-export const FULLSET = [
-  [4, 4, 4, 4, 4, 4, 4, 4, 4],
-  [4, 4, 4, 4, 4, 4, 4, 4, 4],
-  [4, 4, 4, 4, 4, 4, 4, 4, 4],
-  [4, 4, 4, 4, 4, 4, 4]
-]
-
-
-export const emptyHand = () => [
-  [null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-]
-
-
 export const suitStrToSuit = (suitStr, isHonour) => {
   let len = isHonour ? 7 : 9
   let suit = new Array(len).fill(0)

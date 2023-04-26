@@ -4,13 +4,15 @@
   "description": "Tile efficiency calculation for several Mahjong variants",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint:js": "eslint --ext \".js,.ts\" --ignore-path .gitignore .",
     "lintfix": "npm run lint:js -- --fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.39.0"
-  }
+    "eslint": "^8.39.0",
+    "jest": "^29.5.0"
+  },
+  "type": "module"
 }
