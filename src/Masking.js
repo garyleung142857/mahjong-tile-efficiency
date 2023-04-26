@@ -1,10 +1,9 @@
-export const applyMaskSuitPair = (suit_, suitMask) => {
+export const applyMaskSuitPair = (suit, suitMask) => {
   // suit: an array of tileCount
   // suitMask, a 0-1 array with same dimension with suit
   // 1 means targeted tile
   // will be awared of pair
   // will return number of tiles matched and whether pair exists
-  let suit = [...suit_]
   let count = 0
   let pairExists = false
   for (let i = 0; i < suitMask.length; i++){
@@ -20,14 +19,13 @@ export const applyMaskSuitPair = (suit_, suitMask) => {
 }
 
 
-export const applyMaskSuitResidual = (suit_, suitMask) => {
+export const applyMaskSuitResidual = (suit, suitMask) => {
   // suit: an array of tileCount
   // suitMask, a 0-1 array with same dimension with suit
   // 1 means targeted tile
   // will be ignorance of pair
   // return number of tiles matched and remaining tiles
 
-  let suit = [...suit_]
   let count = 0
   for (let i = 0; i < suitMask.length; i++){
     if (suitMask[i] && suit[i]){
