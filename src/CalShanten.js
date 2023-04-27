@@ -58,7 +58,7 @@ const calShantenMenzu = (hand, target = null) => {
 
 
 const calShantenChiitoi = (hand) => {
-  if (handLength(hand) < 13 || handLength(hand) > 14) return Infinity
+  if (handLength(hand) < 13) return Infinity
   // only allow 7 unique pairs
   let pairs = 0
   let uniqueTiles = 0
@@ -84,7 +84,7 @@ const calShantenChiitoi = (hand) => {
 
 
 const calShantenKokushi = (hand) => {
-  if (handLength(hand) < 13 || handLength(hand) > 14) return Infinity
+  if (handLength(hand) < 13) return Infinity
   let hasPair = false
   let uniqueTiles = 0
   // let kokushiTiles = new Array(13)
@@ -106,7 +106,7 @@ const calShantenKokushi = (hand) => {
 
 
 const calShantenSevenPairs = (hand) => {
-  if (handLength(hand) < 13 || handLength(hand) > 14) return Infinity
+  if (handLength(hand) < 13) return Infinity
   // allow identical pairs
   let pairs = 0
 
@@ -126,7 +126,7 @@ const calShantenSevenPairs = (hand) => {
 
 
 const calShantenHonourAndKnittedTiles = (hand) => {
-  if (handLength(hand) < 13 || handLength(hand) > 14) return Infinity
+  if (handLength(hand) < 13) return Infinity
   let uniqueTiles = 0
   const s = []  // matching stat for plain suits
   
@@ -149,7 +149,7 @@ const calShantenHonourAndKnittedTiles = (hand) => {
 
 
 const calShantenKnittedStraight = (hand) => {
-  if (handLength(hand) < 10 || handLength(hand) > 14) return Infinity
+  if (handLength(hand) < 10) return Infinity
   let bestShanten = Infinity  // lowest among 6 possible knits
   const residualTarget = menzuTarget(hand) - 3
   const fixedKnitShanten = (ms) => {
@@ -183,7 +183,7 @@ const calShantenKnittedStraight = (hand) => {
 
 
 const calShantenLikgu = (hand) => {
-  if (handLength(hand) < 16 || handLength(hand) > 17) return Infinity
+  if (handLength(hand) < 16) return Infinity
   // 16 tiles, 7 pairs with a triplet. allow identical pairs
   let pairs = 0
   let hasTriplets = false
@@ -238,7 +238,7 @@ const calShantenBatDaap = (hand) => {
 
 
 const calShantenSapSaamJiu = (hand) => {
-  if (handLength(hand) < 16 || handLength(hand) > 17) return Infinity
+  if (handLength(hand) < 16) return Infinity
   // 16 tiles. Kokushi hand (14 tiles) plus a group (3 tiles, concealed)
   let terminalMatches = 0
 
