@@ -1,4 +1,4 @@
-import { tilesToHand } from '../src/Helper'
+import { tilesToHand } from '../index.js'
 
 const tiles1 = [
   '1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z'

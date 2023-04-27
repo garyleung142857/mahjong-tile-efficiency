@@ -1,6 +1,6 @@
 // test cases obtained from https://github.com/takayama-lily/syanten
 
-import { calShantenRule } from "../src/CalShanten.js"
+import { calShantenRule } from "../index.js"
 
 const riichiRule = calShantenRule('Menzu')
 

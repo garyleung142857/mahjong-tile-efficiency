@@ -6,45 +6,6 @@ export const tileNames = [
 ]
 
 
-export const reduceHand = (hand) => {
-  let resList = []
-  for (let i = 0; i < 4; i++){
-    for (let j = 0; j < tileNames[i].length; j++){
-      if (hand[i][j]){
-        resList.push({
-          tile: tileNames[i][j],
-          analysis: hand[i][j]
-        })
-      }
-    }
-  }
-  return resList
-}
-
-
-export const suitStrToSuit = (suitStr, isHonour) => {
-  let len = isHonour ? 7 : 9
-  let suit = new Array(len).fill(0)
-  for (let j = 0; j < suitStr.length; j++){
-    let c = parseInt(suitStr[j])
-    if (c >= 1 && c <= len){
-      suit[c - 1]++
-    }
-  }
-  return suit
-}
-
-
-export const suitStrsToHand = (suitsStrArr) => {
-  let hand = []
-  for (let i = 0; i < 4; i++){
-    const isHonour = (i == 3)
-    hand.push(suitStrToSuit(suitsStrArr[i], isHonour))
-  }
-  return hand
-}
-
-
 export const tilesToHand = (tilesArr) => {
   let hand = [
     new Array(9).fill(0),
@@ -103,16 +64,6 @@ export const sortHand = (hand) => {
 export const checkTile = (tileName) => {
   return tileNames.some(suit => suit.includes(tileName))
 }
-
-export const rulesNames = [
-  {text: '面子', value: 'Menzu'},
-  {text: '舊章', value: 'HK'},
-  {text: '日本', value: 'Riichi'},
-  {text: '中庸', value: 'ZungJung'},
-  {text: '國標', value: 'MCR'},
-  {text: '台灣', value: 'Taiwan'},
-  {text: '港台', value: 'HKTW'}
-]
 
 export const rulesMax = {
   'Menzu': Infinity,
