@@ -26,15 +26,16 @@ export const applyMaskSuitResidual = (suit, suitMask) => {
   // will be ignorance of pair
   // return number of tiles matched and remaining tiles
 
+  let suit_ = [...suit]
   let count = 0
   for (let i = 0; i < suitMask.length; i++){
-    if (suitMask[i] && suit[i] > 0){
+    if (suitMask[i] && suit_[i] > 0){
       count++
-      suit[i]--
+      suit_[i]--
     }
   }
 
-  return [count, suit]
+  return [count, suit_]
 }
 
 const kokushiPlain = [true, false, false, false, false, false, false, false, true]
