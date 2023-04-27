@@ -1,7 +1,10 @@
 import { calOptimalSuitCombination } from './SuitCombination.js'
 import { applyMaskSuitPair, applyMaskSuitResidual, masks } from './Masking.js'
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const handLength = (hand) => {
   let s = 0
   hand.forEach(suit => {
@@ -12,14 +15,20 @@ const handLength = (hand) => {
   return s
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const menzuTarget = (hand) => {
   // calculate the number of menzu needed with the length of hand
   let length = handLength(hand)
   return Math.floor(length / 3)
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenMenzu = (hand, target = null) => {
 
   const menzuFormula = (deficit, taatsu, pairExists) => {
@@ -56,7 +65,10 @@ const calShantenMenzu = (hand, target = null) => {
   return shanten
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenChiitoi = (hand) => {
   if (handLength(hand) < 13) return Infinity
   // only allow 7 unique pairs
@@ -82,7 +94,10 @@ const calShantenChiitoi = (hand) => {
   return shanten
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenKokushi = (hand) => {
   if (handLength(hand) < 13) return Infinity
   let hasPair = false
@@ -104,7 +119,10 @@ const calShantenKokushi = (hand) => {
   return 13 - uniqueTiles - 1 * hasPair 
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenSevenPairs = (hand) => {
   if (handLength(hand) < 13) return Infinity
   // allow identical pairs
@@ -124,7 +142,10 @@ const calShantenSevenPairs = (hand) => {
   return 6 - pairs
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenHonourAndKnittedTiles = (hand) => {
   if (handLength(hand) < 13) return Infinity
   let uniqueTiles = 0
@@ -147,7 +168,10 @@ const calShantenHonourAndKnittedTiles = (hand) => {
   return 13 - uniqueTiles
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenKnittedStraight = (hand) => {
   if (handLength(hand) < 10) return Infinity
   let bestShanten = Infinity  // lowest among 6 possible knits
@@ -181,7 +205,10 @@ const calShantenKnittedStraight = (hand) => {
   return bestShanten
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenLikgu = (hand) => {
   if (handLength(hand) < 16) return Infinity
   // 16 tiles, 7 pairs with a triplet. allow identical pairs
@@ -206,7 +233,10 @@ const calShantenLikgu = (hand) => {
   return 8 - pairs - 1 * hasTriplets
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenBatDaap = (hand) => {
   if (handLength(hand) < 16 || handLength(hand) > 17) return Infinity
   // 16 tiles, 16 kinds tiles forming no taatsus. One kind consisting of a pair
@@ -236,7 +266,10 @@ const calShantenBatDaap = (hand) => {
   return 16 - matches - pairExists * 1
 }
 
-
+/**
+ * @param {Hand} hand 
+ * @returns {number} Shanten number
+ */
 const calShantenSapSaamJiu = (hand) => {
   if (handLength(hand) < 16) return Infinity
   // 16 tiles. Kokushi hand (14 tiles) plus a group (3 tiles, concealed)
@@ -286,7 +319,18 @@ const calShantenSapSaamJiu = (hand) => {
   return 13 - terminalMatches + bestResidualShanten
 }
 
-
+/**
+ * A list of functions for calculating shanten of a hand, with different winning patterns
+ * calShantenMenzu, 面子手 standard hand
+ * calShantenChiitoi, 七對子 7 pairs (disallow identical pairs)
+ * calShantenSevenPairs, 七對 7 pairs (allow identical pairs)
+ * calShantenKokushi, 十三么九 / 十三么 / 國士無雙 13 orphans.
+ * calShantenHonourAndKnittedTiles, 全不靠 （see MCR rules)
+ * calShantenKnittedStraight, 組合龍 (see MCR rules)
+ * calShantenLikgu, 嚦咕嚦咕 (see HKTW rules)
+ * calShantenBatDaap, 十六不搭 (see HKTW rules)
+ * calShantenSapSaamJiu 十三么 (specifically for HKTW rules)
+ */
 export const cal = {
   calShantenMenzu,
   calShantenChiitoi,

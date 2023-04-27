@@ -57,6 +57,12 @@ const ukeire2 = (hand, calRule) => {
   }
 }
 
+/**
+ * Calculate the ukeire of the hand, depending on the state of the hand
+ * @param {Hand} hand 
+ * @param {RuleName} ruleName 
+ * @returns 
+ */
 export const calUkeire = (hand, ruleName) => {
   let state = null
   try {

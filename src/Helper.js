@@ -1,3 +1,6 @@
+/**
+ * name of tiles in a hand
+ */
 export const tileNames = [
   ['1m', '2m', '3m', '4m', '5m', '6m', '7m', '8m', '9m'],
   ['1p', '2p', '3p', '4p', '5p', '6p', '7p', '8p', '9p'],
@@ -5,7 +8,10 @@ export const tileNames = [
   ['1z', '2z', '3z', '4z', '5z', '6z', '7z'],
 ]
 
-
+/**
+ * @param {Array<TileName>} tilesArr array of tiles
+ * @returns {Hand}
+ */
 export const tilesToHand = (tilesArr) => {
   let hand = [
     new Array(9).fill(0),
@@ -27,6 +33,11 @@ export const tilesToHand = (tilesArr) => {
   return hand
 }
 
+/**
+ * @param {Hand} hand 
+ * @param {RuleName} ruleName
+ * @returns status: To draw | To play
+ */
 export const checkHand = (hand, ruleName) =>{
   const handLen = hand.reduce(
     (a, b) => a.concat(b), []
@@ -49,6 +60,10 @@ export const checkHand = (hand, ruleName) =>{
   }
 }
 
+/**
+ * Sort the hand in order
+ * @param {Hand} hand
+ */
 export const sortHand = (hand) => {
   const SUITS = ['m', 'p', 's', 'z']
   const RANKS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
