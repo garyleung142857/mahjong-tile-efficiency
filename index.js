@@ -1,5 +1,5 @@
 import { calShantenRule, cal } from './src/CalShanten.js'
-import { tilesToHand, checkHand } from './src/Helper.js'
+import { tilesToHand } from './src/Helper.js'
 import { calUkeireRule } from './src/Ukerie.js'
 
 class RuleSet {
@@ -12,6 +12,5 @@ class RuleSet {
 export {
   RuleSet,
   cal,
-  tilesToHand,
-  checkHand,
+  tilesToHand
 }
