@@ -34,10 +34,8 @@ export const suitToStr = (suit, isHonour) => {
     // hash represent counts of tiles
     // start from the lowest existing tiles
     // ends with highest existing tiles
-    // eg. 245667 will map to 101121
-    while(suit[0] === 0) suit.shift()
-    while(suit[suit.length - 1] === 0) suit.pop()
-    s = suit.join('')
+    // eg. 245667 will map to 1 1121
+    s = suit.join('').replace('0', ' ').trim() // dirty
   }
   return s
 }

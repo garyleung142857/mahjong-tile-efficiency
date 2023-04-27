@@ -341,7 +341,7 @@ const ruleHKTW = [
   cal.calShantenBatDaap
 ]
 
-const rules = {
+export const rules = {
   'Menzu': ruleMenzu,
   'HK': ruleHK,
   'Riichi': ruleRiichi,

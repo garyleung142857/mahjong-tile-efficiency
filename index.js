@@ -1,11 +1,11 @@
 import { calShantenRule, cal } from './src/CalShanten.js'
-import { tileNames, tilesToHand, sortHand, checkHand } from './src/Helper.js'
+import { tilesToHand, checkHand } from './src/Helper.js'
+import { calUkeire } from './src/Ukerie.js'
 
 export {
   calShantenRule,
   cal,
-  tileNames,
   tilesToHand,
-  sortHand,
-  checkHand
+  checkHand,
+  calUkeire
 }
