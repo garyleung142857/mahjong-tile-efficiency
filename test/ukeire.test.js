@@ -1,11 +1,12 @@
-import { calUkeire, tilesToHand } from "../index.js";
+import { RuleSet, tilesToHand } from "../index.js";
 
 test('ukeire for 3n+1 hand', () => {
+  const riichiRule = new RuleSet('Riichi')
   const tiles1 = [
     '1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z'
   ]
   const hand1 = tilesToHand(tiles1)
-  expect(calUkeire(hand1, 'Riichi')).toStrictEqual({
+  expect(riichiRule.calUkeire(hand1, 'Riichi')).toStrictEqual({
     shanten: 1,
     ukeire: { '6p': 3, '7p': 1, '8p': 2, '9p': 4, '5s': 2, '1z': 2 },
     totalUkeire: 14
@@ -14,12 +15,13 @@ test('ukeire for 3n+1 hand', () => {
 })
 
 test('ukeire for 3n+2 hand', () => {
+  const hktwRule = new RuleSet('HKTW')
   const tiles2 = [
     '1m', '5m', '6m', '7m', '2p', '5p', '6p', '9p', '1s', '5s', '6s', '8s', '1z', '2z', '3z', '4z', '4z'
   ]
 
   const hand2 = tilesToHand(tiles2)
-  expect(calUkeire(hand2, 'HKTW')).toStrictEqual({
+  expect(hktwRule.calUkeire(hand2, 'HKTW')).toStrictEqual({
     shanten: 3,
     normalDiscard: {
       '5m': { '4m': 4, '9m': 4, '5z': 4, '6z': 4, '7z': 4 },

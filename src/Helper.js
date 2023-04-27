@@ -9,7 +9,7 @@ export const tileNames = [
 ]
 
 /**
- * @param {Array<TileName>} tilesArr array of tiles
+ * @param {Tiles} tilesArr array of tiles
  * @returns {Hand}
  */
 export const tilesToHand = (tilesArr) => {

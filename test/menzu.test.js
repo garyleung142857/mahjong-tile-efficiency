@@ -1,8 +1,8 @@
 // test cases obtained from https://github.com/takayama-lily/syanten
 
-import { calShantenRule } from "../index.js"
+import { RuleSet } from "../index.js"
 
-const riichiRule = calShantenRule('Menzu')
+const menzuRule = new RuleSet('Menzu')
 
 const arr = [
   [3,4,9,10,15,15,16,20,24,27,28,29,31,33,5],
@@ -1020,7 +1020,7 @@ const cases = arr.map(v => {
 cases.forEach(c => {
   test('Riichi rule shanten', () => {
     expect(
-      riichiRule(c.hand)
+      menzuRule.calShanten(c.hand)
     ).toStrictEqual(c.expect)
   })
 })

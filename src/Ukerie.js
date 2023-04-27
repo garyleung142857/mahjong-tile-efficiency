@@ -63,18 +63,20 @@ const ukeire2 = (hand, calRule) => {
  * @param {RuleName} ruleName 
  * @returns 
  */
-export const calUkeire = (hand, ruleName) => {
-  let state = null
-  try {
-    state = checkHand(hand, ruleName)
-  } catch (e) {
-    console.error(e)
-  }
-
-  const rule = calShantenRule(ruleName)
-  if (state === 'To draw'){
-    return ukeire1(hand, rule)
-  } else {
-    return ukeire2(hand, rule)
+export const calUkeireRule = (ruleName) => {
+  return (hand) => {
+    let state = null
+    try {
+      state = checkHand(hand, ruleName)
+    } catch (e) {
+      console.error(e)
+    }
+  
+    const rule = calShantenRule(ruleName)
+    if (state === 'To draw'){
+      return ukeire1(hand, rule)
+    } else {
+      return ukeire2(hand, rule)
+    }
   }
 }
