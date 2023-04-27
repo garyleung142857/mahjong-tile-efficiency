@@ -257,7 +257,7 @@ const calShantenSapSaamJiu = (hand) => {
 
   for (let i = 0; i < 4; i++){
     for (let j = 0; j < hand_[i].length; j++){
-      if(kokushiMasks[i][j] && hand_[i][j]){
+      if(kokushiMasks[i][j] && hand_[i][j] > 0){
         terminalMatches++
         if(hand_[i][j] >= 2){
           terminalPairs.push({i, j})
