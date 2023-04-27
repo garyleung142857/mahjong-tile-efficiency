@@ -253,20 +253,14 @@ const calShantenSapSaamJiu = (hand) => {
     [...hand[0]], [...hand[1]], [...hand[2]], [...hand[3]]
   ]
 
-  let terminalPairs = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0]
-  ]  // for optimizing by checking which pair to use
-
+  let terminalPairs = []  // for optimizing by checking which pair to use
 
   for (let i = 0; i < 4; i++){
     for (let j = 0; j < hand_[i].length; j++){
       if(kokushiMasks[i][j] && hand_[i][j]){
         terminalMatches++
         if(hand_[i][j] >= 2){
-          terminalPairs[i][j] = 1
+          terminalPairs.push({i, j})
         }
         hand_[i][j]--
       }
@@ -278,19 +272,15 @@ const calShantenSapSaamJiu = (hand) => {
   let bestResidualShanten = Math.max(-1, calShantenMenzu(hand_, 1)) + 1
   hand_[3].pop()
 
-  for (let i = 0; i < 4; i++){
-    for (let j = 0; j < hand_[i].length; j++){
-      if(terminalPairs[i][j]){
-        hand_[i][j]--
-        // give a pair to the residual hand as we already have a pair in terminals
-        hand_[3].push(2)
-        bestResidualShanten = Math.min(
-          Math.max(-1, calShantenMenzu(hand_, 1)), bestResidualShanten
-        )
-        hand_[i][j]++
-        hand_[3].pop()
-      }
-    }
+  for (let terminalPair of terminalPairs) {
+    hand_[terminalPair.i][terminalPair.j]--
+    // give a pair to the residual hand as we already have a pair in terminals
+    hand_[3].push(2)
+    bestResidualShanten = Math.min(
+      Math.max(-1, calShantenMenzu(hand_, 1)), bestResidualShanten
+    )
+    hand_[terminalPair.i][terminalPair.j]++
+    hand_[3].pop()
   }
 
   return 13 - terminalMatches + bestResidualShanten
