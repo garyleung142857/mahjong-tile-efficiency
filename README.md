@@ -11,7 +11,9 @@
 Convert a hand of `tiles` format to `hand` format
 
 ```javascript
-const tiles = ['1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z']
+const tiles = [
+  '1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z'
+]
 const hand = tilesToHand(tiles)
 console.log(hand)
 // [
@@ -58,7 +60,9 @@ Note: if is a karaten (empty tenpai, waiting for the "fifth tile"), the function
 
 ```javascript
 import { tilesToHand, RuleSet } from 'mahjong-tile-efficiency'
-const tiles = ['1m', '1m', '1m', '6p', '7p', '7p', '1s', '1s', '2s', '5s', '5s', '1z', '1z', '1z']
+const tiles = [
+  '1m', '1m', '1m', '6p', '7p', '7p', '1s', '1s', '2s', '5s', '5s', '1z', '1z', '1z'
+]
 const hand = tilesToHand(tiles)
 
 const riichiRule = new RuleSet('Riichi')
@@ -95,6 +99,32 @@ console.log(ukeireResult)
 
 ```
 
+### Calculate shanten based on final shape
+Each mahjong rule consists of different winning pattern.
+ - calShantenMenzu: 面子手 standard hand
+ - calShantenChiitoi: 七對子 7 pairs (disallow identical pairs)
+ - calShantenSevenPairs: 七對 7 pairs (allow identical pairs)
+ - calShantenKokushi: 十三么九 / 十三么 / 國士無雙 13 orphans.
+ - calShantenHonourAndKnittedTiles: 全不靠 (see MCR rules)
+ - calShantenKnittedStraight, 組合龍 (see MCR rules)
+ - calShantenLikgu, 嚦咕嚦咕 (see HKTW rules)
+ - calShantenBatDaap, 十六不搭 (see HKTW rules)
+ - calShantenSapSaamJiu 十三么 (specifically for HKTW rules)
+
+You can calculate the shanten specifically for a winning pattern. For example:
+
+```javascript
+import { cal, tilesToHand } from 'mahjong-tile-efficiency'
+
+
+const tiles = [
+  '1m', '4m', '9m', '5p', '8p', '8p', '4s', '6s', '9s', '1z', '2z', '3z', '4z', '5z'
+]
+
+const hand = tilesToHand(tiles)
+console.log(cal.calShantenHonourAndKnittedTiles(hand))
+// 2
+```
 
 ## Terminologies
 
