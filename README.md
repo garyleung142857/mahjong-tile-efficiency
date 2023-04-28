@@ -27,15 +27,18 @@ console.log(hand)
 A `RuleSet` is a class. An instance of `RuleSet` has two functions: `calShanten` and `calUkeire`. Both functions take in a `hand` as param.
 
 ```javascript
-const tiles = ['1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z']
+import { tilesToHand, RuleSet } from 'mahjong-tile-efficiency'
+const tiles = [
+  '1m', '2m', '3m', '6p', '7p', '7p', '7p', '8p', '8p', '5s', '5s', '1z', '1z'
+]
 const hand = tilesToHand(tiles)
 
 const riichiRule = new RuleSet('Riichi')  // 'Menzu' | 'HK' | 'Riichi' | 'ZungJung' | 'MCR' | 'Taiwan' | 'HKTW'
 const shantenResult = riichiRule.calShanten(hand)
 const ukeireResult = riichiRule.calUkeire(hand)
 
-console.log('shanten: ' + shantenResult)
-console.log('ukeire: ' + ukeireResult)
+console.log(shantenResult)
+console.log(ukeireResult)
 
 // 1
 // {
@@ -54,6 +57,7 @@ Note: if is a karaten (empty tenpai, waiting for the "fifth tile"), the function
 - With `3n + 2` tiles, the status is "to discard". `calUkeire().normalDiscard` tells what discard can keep the shanten number, while `calUkeire().recedingDiscard` tells what discard will make shaten number increases (usually inferior play).
 
 ```javascript
+import { tilesToHand, RuleSet } from 'mahjong-tile-efficiency'
 const tiles = ['1m', '1m', '1m', '6p', '7p', '7p', '1s', '1s', '2s', '5s', '5s', '1z', '1z', '1z']
 const hand = tilesToHand(tiles)
 
@@ -112,10 +116,10 @@ const tiles = [
 ]
 
 const hand = [
-    [1, 1, 1, 0, 0, 0, 0, 0, 0],  // man
-    [0, 0, 0, 0, 0, 1, 3, 2, 0],  // pin
-    [0, 0, 0, 0, 2, 0, 0, 0, 0],  // sou
-    [2, 0, 0, 0, 0, 0, 0]  // zi
+  [1, 1, 1, 0, 0, 0, 0, 0, 0],  // man
+  [0, 0, 0, 0, 0, 1, 3, 2, 0],  // pin
+  [0, 0, 0, 0, 2, 0, 0, 0, 0],  // sou
+  [2, 0, 0, 0, 0, 0, 0]  // zi
 ]
 ```
 
