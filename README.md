@@ -106,10 +106,10 @@ Each mahjong rule consists of different winning pattern.
  - calShantenSevenPairs: 七對 7 pairs (allow identical pairs)
  - calShantenKokushi: 十三么九 / 十三么 / 國士無雙 13 orphans.
  - calShantenHonourAndKnittedTiles: 全不靠 (see MCR rules)
- - calShantenKnittedStraight, 組合龍 (see MCR rules)
- - calShantenLikgu, 嚦咕嚦咕 (see HKTW rules)
- - calShantenBatDaap, 十六不搭 (see HKTW rules)
- - calShantenSapSaamJiu 十三么 (specifically for HKTW rules)
+ - calShantenKnittedStraight: 組合龍 (see MCR rules)
+ - calShantenLikgu: 嚦咕嚦咕 (see HKTW rules)
+ - calShantenBatDaap: 十六不搭 (see HKTW rules)
+ - calShantenSapSaamJiu: 十三么 (specifically for HKTW rules)
 
 You can calculate the shanten specifically for a winning pattern. For example:
 
