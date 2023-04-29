@@ -1,6 +1,6 @@
 {
   "name": "mahjong-tile-efficiency",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Tile efficiency calculation for several Mahjong variants",
   "keywords": [
     "Mahjong",
@@ -12,6 +12,11 @@
     "Ukeire"
   ],
   "main": "index.js",
+  "files": [
+    "/src/*",
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint:js": "eslint --ext \".js\" --ignore-path .gitignore .",
