@@ -12,6 +12,11 @@
     "Ukeire"
   ],
   "main": "index.js",
+  "files": [
+    "/src/*",
+    "index.js",
+    "index.d.ts"
+  ],
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint:js": "eslint --ext \".js\" --ignore-path .gitignore .",
