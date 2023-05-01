@@ -408,4 +408,3 @@ export const calShantenRule = (ruleName='Menzu') => {
     return Math.min(...minShantens)
   }
 }
-
