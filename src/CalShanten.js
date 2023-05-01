@@ -1,11 +1,7 @@
 import { calOptimalSuitCombination } from './SuitCombination.js'
 import { applyMaskSuitPair, applyMaskSuitResidual, masks } from './Masking.js'
 
-/**
- * @param {Hand} hand 
- * @returns {number} Shanten number
- */
-const handLength = (hand) => {
+let handLength = (hand) => {
   let s = 0
   hand.forEach(suit => {
     suit.forEach(tileCount => {
@@ -13,6 +9,15 @@ const handLength = (hand) => {
     })
   })
   return s
+}
+
+/**
+ * Allow flexibility to alter the handlength.
+ * Make some shape pass the test
+ * @param {Function} func 
+ */
+export const setHandLength = (func) => {
+  handLength = func
 }
 
 /**
@@ -403,4 +408,3 @@ export const calShantenRule = (ruleName='Menzu') => {
     return Math.min(...minShantens)
   }
 }
-
