@@ -1,4 +1,4 @@
-import { calShantenRule, cal } from './src/CalShanten.js'
+import { calShantenRule, cal, setHandLength } from './src/CalShanten.js'
 import { tilesToHand } from './src/Helper.js'
 import { calUkeireRule } from './src/Ukerie.js'
 
@@ -12,5 +12,6 @@ class RuleSet {
 export {
   RuleSet,
   cal,
+  setHandLength,
   tilesToHand
 }
