@@ -129,7 +129,7 @@ console.log(cal.calShantenHonourAndKnittedTiles(hand))
 ## Terminologies
 
 ### TileName
-There are 34 valid tile names, which are `1m` to `9m`, `1p` to `9p`, `1s` to `9s`, and `1z` to `9z`.
+There are 34 valid tile names, which are `1m` to `9m`, `1p` to `9p`, `1s` to `9s`, and `1z` to `7z`.
 `m` `p` `s` corresponds to "Man", "Pin", and "Sou" plain suits (萬筒索). `z` represents honour tiles (東南西北白發中).
 
 The program does not support `0m` `0p` `0s` for Aka-dora as in Riichi Mahjong.
