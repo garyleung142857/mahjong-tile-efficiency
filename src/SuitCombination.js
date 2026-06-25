@@ -14,6 +14,7 @@ let maxGroups  // running max
 let maxTaatsus  // running max
 let maxTaatsusWithPair  // running max
 
+let suitLenCache  // ponytail: avoid reduce per recursive call
 let suitMap = new Map()
 
 export const suitToStr = (suit, isHonour) => {
@@ -57,12 +58,15 @@ export const calOptimalSuitCombination = (suit_, isHonour_ = false) => {
   maxTaatsus = 0
   maxTaatsusWithPair = 0
 
+  suitLenCache = suit.reduce((a, b) => a + b, 0)
+
   removeGroups()
 
   for (let residual of residuals){
     taatsus = 0
     pairs = 0
     suit = residual
+    suitLenCache = residual.reduce((a, b) => a + b, 0)
     removeTaatsus()
     if(suitLen() <= 1 && pairs > 0){
       break
@@ -76,91 +80,107 @@ export const calOptimalSuitCombination = (suit_, isHonour_ = false) => {
 
 const removeGroups = (i = 0) => {
 
-  if(groups > maxGroups){
-    maxGroups = groups
-    residuals = new Array()
-  } else if(groups == maxGroups){
-    residuals.push([...suit])
-  }
-
-  // i: start searching at this index
-  if(i > suit.length){return groups}
-
   // skip to index with existing tile
-  for(; i < suit.length && suit[i] == 0; i++){
+  let pos = i
+  for(; pos < suit.length && suit[pos] == 0; pos++){
     //empty
   }
 
+  // ponytail: pruning bound - can't beat current best
+  if (groups + Math.floor(suitLenCache / 3) < maxGroups) return
+
+  if(pos >= suit.length){
+    if(groups > maxGroups){
+      maxGroups = groups
+      residuals = [[...suit]]
+    } else if(groups == maxGroups){
+      residuals.push([...suit])
+    }
+    return
+  }
+
   // triplet
-  if(suit[i] >= 3){
+  if(suit[pos] >= 3){
     groups++
-    suit[i] -= 3
-    removeGroups(i)
-    suit[i] += 3
+    suit[pos] -= 3
+    suitLenCache -= 3
+    removeGroups(pos)
+    suitLenCache += 3
+    suit[pos] += 3
     groups--
   }
 
   // run
-  if(!isHonour && suit[i + 1] > 0 && suit[i + 2] > 0){
+  if(!isHonour && suit[pos + 1] > 0 && suit[pos + 2] > 0){
     groups++
-    suit[i]--; suit[i + 1]--; suit[i + 2]--
-    removeGroups(i)
-    suit[i]++; suit[i + 1]++; suit[i + 2]++
+    suit[pos]--; suit[pos + 1]--; suit[pos + 2]--
+    suitLenCache -= 3
+    removeGroups(pos)
+    suitLenCache += 3
+    suit[pos]++; suit[pos + 1]++; suit[pos + 2]++
     groups--
   }
 
-  removeGroups(i + 1)
+  // skip to next position
+  removeGroups(pos + 1)
 }
 
 const removeTaatsus = (i = 0) => {
 
-  if (taatsus > maxTaatsus){
-    maxTaatsus = taatsus
-  }
-
-  if (pairs > 0 && taatsus > maxTaatsusWithPair){
-    maxTaatsusWithPair = taatsus
-  }
-
-  // i: start searching at this index
-  if(i > suit.length){return taatsus}
-
-  // already optimal. Short circuiting
-
-  // skip to index with existing tile
-  for(; i < suit.length && suit[i] == 0; i++){
+  let pos = i
+  for(; pos < suit.length && suit[pos] == 0; pos++){
     //empty
   }
 
+  // ponytail: pruning bounds for taatsus
+  const maxTaatsuPossible = taatsus + Math.floor(suitLenCache / 2)
+  if (maxTaatsuPossible < maxTaatsus && maxTaatsuPossible < maxTaatsusWithPair) return
+
+  if(pos >= suit.length){
+    if (taatsus > maxTaatsus){
+      maxTaatsus = taatsus
+    }
+    if (pairs > 0 && taatsus > maxTaatsusWithPair){
+      maxTaatsusWithPair = taatsus
+    }
+    return
+  }
+
   // Pair
-  if(suit[i] >= 2){
+  if(suit[pos] >= 2){
     taatsus++; pairs++
-    suit[i] -= 2
-    removeTaatsus(i)
-    suit[i] += 2
+    suit[pos] -= 2
+    suitLenCache -= 2
+    removeTaatsus(pos)
+    suitLenCache += 2
+    suit[pos] += 2
     taatsus--; pairs--
   }
 
   // protorun
   if(!isHonour){
-    if(suit[i + 1] > 0){
+    if(suit[pos + 1] > 0){
       taatsus++
-      suit[i]--; suit[i + 1]--
-      removeTaatsus(i)
-      suit[i]++; suit[i + 1]++
+      suit[pos]--; suit[pos + 1]--
+      suitLenCache -= 2
+      removeTaatsus(pos)
+      suitLenCache += 2
+      suit[pos]++; suit[pos + 1]++
       taatsus--
     }
 
-    if(suit[i + 2] > 0){
+    if(suit[pos + 2] > 0){
       taatsus++
-      suit[i]--; suit[i + 2]--
-      removeTaatsus(i)
-      suit[i]++; suit[i + 2]++
+      suit[pos]--; suit[pos + 2]--
+      suitLenCache -= 2
+      removeTaatsus(pos)
+      suitLenCache += 2
+      suit[pos]++; suit[pos + 2]++
       taatsus--
     }
   }
 
-  removeTaatsus(i + 1)
+  removeTaatsus(pos + 1)
 }
 
 const suitLen = () => {

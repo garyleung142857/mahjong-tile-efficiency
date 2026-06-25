@@ -12,24 +12,18 @@ export const tileNames = [
  * @param {Tiles} tilesArr array of tiles
  * @returns {Hand}
  */
+const suitChar = { m: 0, p: 1, s: 2, z: 3 }
+
 export const tilesToHand = (tilesArr) => {
-  let hand = [
+  const hand = [
     new Array(9).fill(0),
     new Array(9).fill(0),
     new Array(9).fill(0),
     new Array(7).fill(0),
   ]
-
-  for (let i = 0; i < 4; i++){
-    for (let j = 0; j < hand[i].length; j++){
-      for (let tileName of tilesArr){
-        if (tileName == tileNames[i][j]){
-          hand[i][j]++
-        }
-      }
-    }
+  for (const tile of tilesArr) {
+    hand[suitChar[tile[tile.length - 1]]][parseInt(tile, 10) - 1]++
   }
-
   return hand
 }
 

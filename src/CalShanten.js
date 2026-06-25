@@ -1,6 +1,9 @@
 import { calOptimalSuitCombination } from './SuitCombination.js'
 import { applyMaskSuitPair, applyMaskSuitResidual, masks } from './Masking.js'
 
+// ponytail: unbounded cache, typical usage is bounded by ukeire loops
+const menzuCache = new Map()
+
 let handLength = (hand) => {
   let s = 0
   hand.forEach(suit => {
@@ -35,6 +38,21 @@ const menzuTarget = (hand) => {
  * @returns {number} Shanten number
  */
 const calShantenMenzu = (hand, target = null) => {
+
+  // ponytail: only cache calls with default target (common case)
+  if (target === null) {
+    const cacheKey = hand[0].join('') + '|' + hand[1].join('') + '|' + hand[2].join('') + '|' + hand[3].join('')
+    const cached = menzuCache.get(cacheKey)
+    if (cached !== undefined) return cached
+
+    const result = _calShantenMenzu(hand, null)
+    menzuCache.set(cacheKey, result)
+    return result
+  }
+  return _calShantenMenzu(hand, target)
+}
+
+const _calShantenMenzu = (hand, target) => {
 
   const menzuFormula = (deficit, taatsu, pairExists) => {
     if(taatsu < deficit + 1){
